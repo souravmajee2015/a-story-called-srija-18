@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#08080b" />
+    <title>For the girl who made ordinary moments unforgettable.</title>
+    <meta
+      name="description"
+      content="A small, quiet universe written for one person."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="is-locked">
+    <!-- ============ AMBIENT LAYERS ============ -->
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div id="petals" class="petals" aria-hidden="true"></div>
+
+    <!-- ============ 1. SECRET GATE ============ -->
+    <section
+      class="scene scene--gate is-active"
+      id="scene-gate"
+      aria-label="Before you enter"
+    >
+      <div class="gate">
+        <p class="eyebrow">Before you enter&hellip;</p>
+        <h1 class="gate__title">There is a little secret here.</h1>
+        <p class="gate__sub">
+          You already know the answer. <span class="heart">&#10084;</span>
+        </p>
+
+        <form class="gate__form" id="gate-form" autocomplete="off" novalidate>
+          <fieldset class="date-fields">
+            <legend class="sr-only">Enter the date</legend>
+            <label class="field">
+              <span>DD</span>
+              <input
+                type="text"
+                id="gate-dd"
+                inputmode="numeric"
+                autocomplete="bday-day"
+                maxlength="2"
+                placeholder="&bull;&bull;"
+                aria-label="Day, two digits"
+              />
+            </label>
+            <span class="slash" aria-hidden="true">/</span>
+            <label class="field">
+              <span>MM</span>
+              <input
+                type="text"
+                id="gate-mm"
+                inputmode="numeric"
+                autocomplete="bday-month"
+                maxlength="2"
+                placeholder="&bull;&bull;"
+                aria-label="Month, two digits"
+              />
+            </label>
+            <span class="slash" aria-hidden="true">/</span>
+            <label class="field field--wide">
+              <span>YYYY</span>
+              <input
+                type="text"
+                id="gate-yyyy"
+                inputmode="numeric"
+                autocomplete="bday-year"
+                maxlength="4"
+                placeholder="&bull;&bull;&bull;&bull;"
+                aria-label="Year, four digits"
+              />
+            </label>
+          </fieldset>
+
+          <button class="btn" type="submit">
+            Begin the story → <span aria-hidden="true">&#127769;</span>
+          </button>
+          <p
+            class="gate__msg"
+            id="gate-msg"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ 2. INTRO ============ -->
+    <section
+      class="scene scene--intro"
+      id="scene-intro"
+      aria-label="Introduction"
+    >
+      <div class="intro">
+        <div class="intro__lines" id="intro-lines">
+          <p class="line" data-line>
+  Somewhere in this enormous universe...
+</p>
+
+<p class="line" data-line>
+  there&rsquo;s a girl who quietly became
+  one of the most special parts of someone&rsquo;s life.
+</p>
+
+<p class="line line--accent" data-line>
+  Her name is Srija. <span aria-hidden="true">&#10084;</span>
+</p>
+        </div>
+
+        <div class="intro__title" id="intro-title">
+          <h1 class="bigname">SRIJA</h1>
+          <p class="chapter">Chapter 18</p>
+          <button class="btn btn--glow" id="open-chapter">
+            Ready to begin the story?<span aria-hidden="true"
+              >&#10024;</span
+            >
+          </button>
+          <p class="tiny-note">Sound is nicer with headphones.🎧</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. HUB — HER UNIVERSE ============ -->
+    <section class="scene scene--hub" id="scene-hub" aria-label="Her universe">
+      <div class="hub" id="hub">
+        <div class="hub__core" aria-hidden="true">
+          <span class="hub__name">SRIJA</span>
+          <span class="hub__halo"></span>
+        </div>
+        <!-- constellation nodes are injected here -->
+      </div>
+      <p class="hub__hint" id="hub-hint">
+        THE STORY IS YOURS TO EXPLORE.
+        <span>Choose any chapter. There’s no right order.</span>
+      </p>
+      <p class="hub__progress">
+        <span id="hub-count">0</span> / 10 chapters explored
+      </p>
+
+      <button class="secret-tease" id="secret-tease" hidden>
+        Psst&hellip;
+      </button>
+    </section>
+
+    <!-- ============ PANEL SHELL (all chapters render inside) ============ -->
+    <div
+      class="panel"
+      id="panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="panel-title"
+      hidden
+    >
+      <div class="panel__bar">
+        <button class="back" id="panel-back" aria-label="Back to her universe">
+          &larr; <span>Universe</span>
+        </button>
+        <h2 class="panel__title" id="panel-title"></h2>
+        <span class="panel__spacer" aria-hidden="true"></span>
+      </div>
+      <div class="panel__body" id="panel-body" tabindex="-1"></div>
+    </div>
+
+    <!-- ============ FINALE: 18 CANDLES ============ -->
+    <section
+      class="scene scene--candles"
+      id="scene-candles"
+      aria-label="Eighteen candles"
+    >
+      <div class="candles-wrap">
+        <p class="eyebrow" id="candle-count">1 candle</p>
+        <div
+          class="cake"
+          id="cake"
+          role="group"
+          aria-label="Eighteen candles, tap to blow out"
+        ></div>
+        <h2 class="candles__cta" id="candles-cta">
+          Make a wish, Dear. <span aria-hidden="true">&#10024;</span>
+        </h2>
+        <p class="tiny-note">Tap each candle&hellip; slowly.</p>
+      </div>
+      <div class="afterglow" id="afterglow" hidden>
+        <h2 class="bigwish">
+          HAPPY 18<sup>TH</sup> BIRTHDAY, SRIJA
+          <span class="heart">&#10084;</span>
+        </h2>
+        <button class="btn" id="to-letter">One last thing &rarr;</button>
+      </div>
+    </section>
+
+    <!-- ============ FINAL LETTER ============ -->
+    <section
+      class="scene scene--letter"
+      id="scene-letter"
+      aria-label="The letter"
+    >
+      <article class="letter" id="final-letter">
+        <!-- === EDIT SRIJA CONTENT HERE: final letter lives in script.js (CONTENT.finalLetter) === -->
+      </article>
+      <button class="btn" id="to-closing">Close the chapter</button>
+    </section>
+
+    <!-- ============ FINAL PAGE ============ -->
+    <section
+      class="scene scene--closing"
+      id="scene-closing"
+      aria-label="Chapter 18 ends here"
+    >
+      <div class="closing">
+        <div class="closing-book" id="closing-book" aria-hidden="true">
+          <div class="closing-book__cover"></div>
+          <div class="closing-book__page"></div>
+        </div>
+        <div class="closing__lines">
+          <p class="line" data-line>Chapter 18 ends here.</p>
+          <p class="line" data-line>But Srija&rsquo;s story doesn&rsquo;t.</p>
+          <p class="line" data-line>You&rsquo;re only 18.</p>
+
+          <p class="line line--accent" data-line>
+            Go write the rest. <span aria-hidden="true">&#127803;</span>
+          </p>
+
+          <p class="line line--small" data-line>
+            And no matter what comes next<span class="heart"></span>
+          </p>
+
+          <p class="line line--small" data-line>
+            I'm with you in every chapter. ❤️
+          </p>
+        </div>
+        <button class="btn btn--ghost" id="restart">Start again &#8635;</button>
+      </div>
+    </section>
+
+    <!-- ============ PERSISTENT MINI PLAYER ============ -->
+    <div class="mini-player" id="mini-player" hidden>
+      <button
+        class="mini-player__btn"
+        id="mini-toggle"
+        aria-label="Play or pause music"
+      >
+        &#9654;
+      </button>
+      <span class="mini-player__label" id="mini-label">🎧 Srija's Playlist</span>
+      <span class="eq" id="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <audio id="audio" preload="none"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
